@@ -1,9 +1,12 @@
-export {};
+export { };
 const express = require("express");
 const scoreboardRoute = require("./routes/scoreboard");
+const cors = require('cors')
 
 const app = express();
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 8080;
+
+app.use(cors());
 
 app.use("/api/v1/sports", [scoreboardRoute]);
 

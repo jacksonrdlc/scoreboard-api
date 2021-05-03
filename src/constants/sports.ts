@@ -1,6 +1,6 @@
 export { };
 
-const BASE_URL = "https://www.espn.com";
+const BASE_URL = "https://proxy.espn.com";
 
 
 const SPORT_URL_MAP = {

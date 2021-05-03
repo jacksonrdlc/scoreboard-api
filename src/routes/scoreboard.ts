@@ -5,33 +5,36 @@ const express = require("express");
 
 const router = express.Router();
 
-const scores = {};
+router.get("/mlb/events", async (req, res) => {
 
-const seconds = (n) => 1000 * n;
+  const response = await fetchData('https://proxy.espn.com/mlb/scoreboard', 'mlb');
 
-function startSchedule() {
-  SPORTS.map(async (sport) => {
-    const url = getSportURL(sport);
-    scores[sport] = await fetchData(url, sport);
-    setInterval(async () => {
-      scores[sport] = await fetchData(url, sport);
-    }, seconds(30));
-  });
-}
-
-startSchedule();
-
-router.get("/:sport/events", (req, res) => {
-  startSchedule();
-  const { sport } = req.params;
-
-  if (!SPORT_URL_MAP[sport]) {
+  if (!response) {
+    return res.sendStatus(404);
+  }
+  if (response.length < 1) {
     return res.sendStatus(404);
   }
 
   res.json({
     date: new Date(),
-    scores: scores[sport] || ""
+    scores: response || []
+  });
+});
+
+router.get("/nba/events", async (req, res) => {
+  const response = await fetchData('https://proxy.espn.com/nba/scoreboard', 'nba');
+
+  if (!response) {
+    return res.sendStatus(404);
+  }
+  if (response.length < 1) {
+    return res.sendStatus(404);
+  }
+
+  res.json({
+    date: new Date(),
+    scores: response || []
   });
 });
 

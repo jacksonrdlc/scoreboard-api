@@ -61,15 +61,13 @@ export async function fetchData(url: string, key: string) {
                     shortDetail: status.type.shortDetail,
                     completed: status.type.completed
                 },
-                teams: {
-                    awayTeam: {
-                        ...away.team,
-                        score: away.score
-                    },
-                    homeTeam: {
-                        ...home.team,
-                        score: home.score
-                    }
+                awayTeam: {
+                    ...away.team,
+                    score: away.score
+                },
+                homeTeam: {
+                    ...home.team,
+                    score: home.score
                 }
             }
         ];
