@@ -1,6 +1,4 @@
-export { };
 const { fetchData } = require("../utils/fetchData");
-const { SPORTS, SPORT_URL_MAP, getSportURL } = require("../constants/sports");
 const express = require("express");
 
 const router = express.Router();
